@@ -1,0 +1,253 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Thank You — WaveHost</title>
+  <meta name="description" content="Your message has been received. WaveHost will be in touch shortly." />
+  <meta name="robots" content="noindex, nofollow" />
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="icon" href="images/logo.png" type="image/png" />
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      background: linear-gradient(160deg, var(--navy) 0%, #061e42 50%, var(--navy-mid) 100%);
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Animated background rings */
+    .success-rings {
+      position: fixed;
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      pointer-events: none;
+      z-index: 0;
+    }
+    .ring {
+      position: absolute;
+      border-radius: 50%;
+      border: 1px solid rgba(0, 196, 232, 0.08);
+      top: 50%; left: 50%;
+      transform: translate(-50%, -50%);
+      animation: ringPulse 4s ease-in-out infinite;
+    }
+    .ring:nth-child(1) { width: 300px; height: 300px; animation-delay: 0s; }
+    .ring:nth-child(2) { width: 500px; height: 500px; animation-delay: 0.6s; border-color: rgba(0,196,232,0.05); }
+    .ring:nth-child(3) { width: 700px; height: 700px; animation-delay: 1.2s; border-color: rgba(0,196,232,0.03); }
+    .ring:nth-child(4) { width: 900px; height: 900px; animation-delay: 1.8s; border-color: rgba(0,196,232,0.02); }
+    @keyframes ringPulse {
+      0%, 100% { opacity: 0.5; transform: translate(-50%,-50%) scale(1); }
+      50%       { opacity: 1;   transform: translate(-50%,-50%) scale(1.04); }
+    }
+
+    /* Floating particles */
+    .s-particles { position: fixed; inset: 0; pointer-events: none; z-index: 0; }
+    .s-particle {
+      position: absolute; border-radius: 50%;
+      background: var(--cyan); opacity: 0;
+      animation: sFloat linear infinite;
+    }
+    @keyframes sFloat {
+      0%   { opacity: 0; transform: translateY(0) scale(0.5); }
+      20%  { opacity: 0.35; }
+      80%  { opacity: 0.15; }
+      100% { opacity: 0; transform: translateY(-70vh) scale(1); }
+    }
+
+    .success-wrap {
+      position: relative; z-index: 2;
+      text-align: center;
+      max-width: 540px;
+      padding: 3rem 2rem;
+      animation: fadeInUp 0.7s ease forwards;
+    }
+    @keyframes fadeInUp {
+      from { opacity: 0; transform: translateY(30px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    .s-logo { height: 42px; margin: 0 auto 2.5rem; }
+
+    .s-icon-wrap {
+      width: 90px; height: 90px;
+      border-radius: 50%;
+      background: linear-gradient(135deg, #1a7fd4, #00c4e8);
+      display: flex; align-items: center; justify-content: center;
+      font-size: 2.2rem;
+      margin: 0 auto 2rem;
+      box-shadow: 0 0 0 0 rgba(0,196,232,0.4);
+      animation: iconPop 0.6s cubic-bezier(0.175,0.885,0.32,1.275) 0.2s both,
+                 iconGlow 2.5s ease-in-out 1s infinite;
+    }
+    @keyframes iconPop {
+      from { transform: scale(0); opacity: 0; }
+      to   { transform: scale(1); opacity: 1; }
+    }
+    @keyframes iconGlow {
+      0%, 100% { box-shadow: 0 0 0 0 rgba(0,196,232,0.35); }
+      50%       { box-shadow: 0 0 0 18px rgba(0,196,232,0); }
+    }
+
+    .s-badge {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: rgba(0,196,232,0.1);
+      border: 1px solid rgba(0,196,232,0.25);
+      border-radius: 50px;
+      padding: 0.4rem 1rem;
+      font-size: 0.78rem; font-weight: 600;
+      letter-spacing: 0.12em; text-transform: uppercase;
+      color: var(--cyan);
+      margin-bottom: 1.25rem;
+    }
+
+    .s-title {
+      font-family: 'Poppins', sans-serif;
+      font-size: clamp(2.2rem, 6vw, 3.2rem);
+      font-weight: 800;
+      color: var(--white);
+      line-height: 1.15;
+      margin-bottom: 1rem;
+    }
+    .s-title span { color: var(--cyan); }
+
+    .s-message {
+      font-size: 1.05rem;
+      color: var(--muted);
+      max-width: 420px;
+      margin: 0 auto 2rem;
+      line-height: 1.7;
+    }
+
+    .s-steps {
+      display: flex;
+      flex-direction: column;
+      gap: 0.75rem;
+      background: rgba(255,255,255,0.04);
+      border: 1px solid rgba(255,255,255,0.08);
+      border-radius: 14px;
+      padding: 1.5rem;
+      margin: 0 auto 2rem;
+      text-align: left;
+      max-width: 400px;
+    }
+    .s-step {
+      display: flex; align-items: flex-start; gap: 0.75rem;
+      font-size: 0.875rem; color: var(--muted);
+    }
+    .s-step-num {
+      min-width: 22px; height: 22px;
+      background: linear-gradient(135deg, #1a7fd4, #00c4e8);
+      border-radius: 50%;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 0.7rem; font-weight: 700;
+      color: var(--navy);
+      margin-top: 1px;
+    }
+
+    .btn-home {
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      background: linear-gradient(135deg, #1a7fd4, #00c4e8);
+      color: #050e1f;
+      font-family: 'Inter', sans-serif;
+      font-weight: 700; font-size: 1rem;
+      padding: 1rem 2.25rem;
+      border-radius: 50px; border: none; cursor: pointer;
+      text-decoration: none;
+      box-shadow: 0 6px 24px rgba(0,196,232,0.35);
+      transition: transform 0.25s ease, box-shadow 0.25s ease;
+    }
+    .btn-home:hover {
+      transform: translateY(-3px);
+      box-shadow: 0 10px 32px rgba(0,196,232,0.5);
+    }
+
+    .s-footer {
+      margin-top: 2.5rem;
+      font-size: 0.8rem;
+      color: rgba(139,175,201,0.5);
+    }
+    .s-footer a { color: var(--cyan); opacity: 0.7; }
+    .s-footer a:hover { opacity: 1; }
+  </style>
+</head>
+<body>
+
+  <!-- Background rings -->
+  <div class="success-rings">
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+    <div class="ring"></div>
+  </div>
+
+  <!-- Floating particles -->
+  <div class="s-particles" id="sParticles"></div>
+
+  <!-- Main content -->
+  <div class="success-wrap">
+
+    <img src="images/logo.png" alt="WaveHost" class="s-logo" />
+
+    <div class="s-icon-wrap">✓</div>
+
+    <div class="s-badge">✓ Submission Received</div>
+
+    <h1 class="s-title">Thank <span>You!</span></h1>
+
+    <p class="s-message">
+      Your message has been successfully submitted. We've received your details and will be in touch with you shortly.
+    </p>
+
+    <div class="s-steps">
+      <div class="s-step">
+        <div class="s-step-num">1</div>
+        <span>We've received your submission and will review it now</span>
+      </div>
+      <div class="s-step">
+        <div class="s-step-num">2</div>
+        <span>Expect a reply by email or phone within a few hours</span>
+      </div>
+      <div class="s-step">
+        <div class="s-step-num">3</div>
+        <span>We'll confirm your order details and send a payment link</span>
+      </div>
+      <div class="s-step">
+        <div class="s-step-num">4</div>
+        <span>Your website will be live within 48 hours of payment 🚀</span>
+      </div>
+    </div>
+
+    <a href="index.html" class="btn-home">
+      🌊 Back to Homepage
+    </a>
+
+    <div class="s-footer">
+      <p>WaveHost · Dublin, Ireland · <a href="contact.html">Contact Us</a></p>
+    </div>
+
+  </div>
+
+  <script>
+    // Spawn floating particles
+    const container = document.getElementById('sParticles');
+    for (let i = 0; i < 20; i++) {
+      const p = document.createElement('div');
+      p.className = 's-particle';
+      const size = Math.random() * 4 + 2;
+      p.style.cssText = `
+        width:${size}px; height:${size}px;
+        left:${Math.random()*100}%;
+        bottom:${Math.random()*15}%;
+        animation-duration:${9+Math.random()*12}s;
+        animation-delay:${Math.random()*9}s;
+      `;
+      container.appendChild(p);
+    }
+  </script>
+</body>
+</html>
